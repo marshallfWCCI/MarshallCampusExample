@@ -1,0 +1,4 @@
+### Get all campuses
+GET http://localhost:8080/campuses
+### Get specific campus
+GET http://localhost:8080/campuses/1
