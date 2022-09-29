@@ -5,6 +5,7 @@ import com.wcci.Campus.Repo.CampusRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 public class CampusController {
@@ -15,14 +16,24 @@ public class CampusController {
         this.campusRepo = campusRepo;
     }
 
-    @RequestMapping("/campuses")
+    @GetMapping("/campuses")
     public Iterable<Campus> getCampuses() {
         return campusRepo.findAll();
     }
 
-    @RequestMapping("/campuses/{id}")
+    @GetMapping("/campuses/{id}")
     public Campus getCampusById(@PathVariable long id) {
         return campusRepo.findById(id).get();
+    }
+
+    @PostMapping("/campuses")
+    public Iterable<Campus> addNewCampus(@RequestBody Campus campus) {
+        Optional<Campus> existingCampus = campusRepo.findByLocation(campus.getLocation());
+        if (existingCampus.isEmpty()) {
+            campusRepo.save(campus);
+        }
+
+        return campusRepo.findAll();
     }
 
 }

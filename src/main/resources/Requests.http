@@ -2,3 +2,11 @@
 GET http://localhost:8080/campuses
 ### Get specific campus
 GET http://localhost:8080/campuses/1
+### Post a new campus
+POST http://localhost:8080/campuses
+Content-Type: application/json
+
+{
+    "location": "Dayton",
+    "techStack": "Python"
+}
