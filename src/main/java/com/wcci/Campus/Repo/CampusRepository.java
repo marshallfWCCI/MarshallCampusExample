@@ -7,4 +7,7 @@ import java.util.Optional;
 
 public interface CampusRepository extends CrudRepository<Campus, Long> {
     Optional<Campus> findByLocation(String location);
+    Campus findByTechStack(String techStack);
+
+    Campus findByLocationAndTechStack(String location, String techStack);
 }
