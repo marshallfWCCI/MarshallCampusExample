@@ -10,3 +10,22 @@ Content-Type: application/json
     "location": "Dayton",
     "techStack": "Python"
 }
+### Put a book in a campus
+PUT http://localhost:8080/campuses/1/addBook
+Content-Type: application/json
+
+{
+    "title": "The Adventures of Huckleberry Finn",
+    "isbn": "098123"
+}
+### Get all books
+GET http://localhost:8080/books
+### Get single book
+GET http://localhost:8080/books/4
+### Add author to book
+PUT http://localhost:8080/books/5/addAuthor
+Content-Type: application/json
+
+{
+    "name": "Jane Austen"
+}

@@ -1,6 +1,8 @@
 package com.wcci.Campus.Controller;
 
+import com.wcci.Campus.Model.Book;
 import com.wcci.Campus.Model.Campus;
+import com.wcci.Campus.Repo.BookRepository;
 import com.wcci.Campus.Repo.CampusRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +14,11 @@ public class CampusController {
 
     private CampusRepository campusRepo;
 
-    public CampusController(CampusRepository campusRepo) {
+    private BookRepository bookRepo;
+
+    public CampusController(CampusRepository campusRepo, BookRepository bookRepo) {
         this.campusRepo = campusRepo;
+        this.bookRepo = bookRepo;
     }
 
     @GetMapping("/campuses")
@@ -35,5 +40,17 @@ public class CampusController {
 
         return campusRepo.findAll();
     }
+
+    @PutMapping("/campuses/{id}/addBook")
+    public Campus addBookToCampus(@PathVariable long id, @RequestBody Book book) {
+        Optional<Campus> existingCampus = campusRepo.findById(id);
+        if (existingCampus.isPresent()) {
+            book.setCampus(existingCampus.get());
+            bookRepo.save(book);
+        }
+        return campusRepo.findById(id).get();
+    }
+
+
 
 }
