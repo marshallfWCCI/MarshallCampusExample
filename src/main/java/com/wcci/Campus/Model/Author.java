@@ -21,11 +21,15 @@ public class Author {
     @JsonIgnore
     private Collection<Book> books;
 
+
+    // How many parameters are in this signature?
+    // A: zero, one, or two, or three, or ANY NUMBER!
     public Author(String name, Book... books) {
         this.name = name;
         this.books = Arrays.asList(books);
     }
 
+    @Deprecated
     public Author() {
     }
 
